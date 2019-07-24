@@ -1,5 +1,8 @@
 #include <simple2d.h>
 #include <random>
+#include <iostream>
+#include <string>
+#include "qrng.h"
 
 S2D_Window *window;
 
@@ -38,8 +41,8 @@ void setScreenResolution(){
 }
 
 int main() {
-
   S2D_Diagnostics(true);
+  printQrngInfo();
 
   window = S2D_CreateWindow(
     "Hello Triangle", windowWidth, windowHeight, update, render, S2D_FULLSCREEN
@@ -67,7 +70,10 @@ void update(){
   if (window->frames % 5 == 0){
     int   dist = dist6(rng);
     float similarity = dist / 10.0;
+    std::string number;
+    getRandomNumber(6);
     bgValue = similarity;
+
     printf("%f\n", bgValue);
     printf("%i\n", dist);
   }
