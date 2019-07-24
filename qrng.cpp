@@ -3,7 +3,7 @@
 using namespace std;
 using namespace idQ;
 
-float getRandomNumber(int bytesCount){
+float getSimilarityRate(int bytesCount){
   QuantisDeviceType deviceType = QUANTIS_DEVICE_USB;
   int deviceNumber = 0;
   Quantis quantis(deviceType, deviceNumber);
@@ -22,7 +22,6 @@ float getRandomNumber(int bytesCount){
     c = ~b^pattern[i];
     similarityAmount += __builtin_popcount(c);
 
-    std::cout << "pop count: " << __builtin_popcount(c);
     ++i;
   }
 

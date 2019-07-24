@@ -3,18 +3,21 @@
 
 S2D_Window *window;
 
-int windowWidth = 640;
-int windowHeight = 480;
+const float WHITE_BG      = 1.0;
+const float LIGHT_GRAY_BG = 0.75;
+const float GRAY_BG       = 0.5;
+const float DARK_GRAY_BG  = 0.25;
+const float BLACK_BG      = 0.0;
+
+int windowWidth = 1920;
+int windowHeight = 1200;
 int screenWidth;
 int screenHeight;
-
 
 float bgValue = 0.0;
 
 void render();
 void update();
-void bgDarker();
-void bgLighter();
 void onKey(S2D_Event e);
 void setScreenResolution(){
   SDL_DisplayMode dm;
@@ -29,6 +32,8 @@ void setScreenResolution(){
   screenWidth = dm.w;
   screenHeight = dm.h;
 }
+float calculateBgValue(float similarity);
+bool inRange(float x, float low, float high);
 
 int main() {
   S2D_Diagnostics(true);
@@ -39,7 +44,7 @@ int main() {
   );
 
   window->on_key = onKey;
-  window->fps_cap = 1;
+  window->fps_cap = 2;
 
   setScreenResolution();
   S2D_Show(window);
@@ -57,13 +62,32 @@ void render(){
 }
 
 void update(){
-  if (window->frames % 5 == 0){
+  if (window->frames % 1 == 0){
     float similarity;
-    similarity = getRandomNumber(6);
-    bgValue = similarity;
+    similarity = getSimilarityRate(6);
 
-    printf("%f\n", bgValue);
+    if(bgValue != WHITE_BG)
+      bgValue = calculateBgValue(similarity);
+
+    printf("similarity: %f\n", similarity);
   }
+}
+
+float calculateBgValue(float similarity){
+  if(inRange(similarity, 0.0, 0.1) || inRange(similarity, 0.9, 1.0))
+    return WHITE_BG;
+
+  if(inRange(similarity, 0.1, 0.2) || inRange(similarity, 0.8, 0.9))
+    return LIGHT_GRAY_BG;
+
+  if(inRange(similarity, 0.2, 0.3) || inRange(similarity, 0.7, 0.8))
+    return GRAY_BG;
+
+  if(inRange(similarity, 0.3, 0.4) || inRange(similarity, 0.6, 0.7))
+    return DARK_GRAY_BG;
+
+  if(inRange(similarity, 0.4, 0.6))
+    return BLACK_BG;
 }
 
 void onKey(S2D_Event e) {
@@ -74,4 +98,9 @@ void onKey(S2D_Event e) {
       }
       break;
   }
+}
+
+bool inRange(float x, float low, float high)
+{
+  return ((x-high)*(x-low) <= 0.0);
 }

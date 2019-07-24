@@ -1,4 +1,4 @@
 #include "Quantis.hpp"
 
-float getRandomNumber(int bytesCount);
+float getSimilarityRate(int bytesCount);
 void printQrngInfo();
