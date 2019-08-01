@@ -29,7 +29,8 @@ endif
 
 qrng-sources := \
 	main.cpp \
-	qrng.cpp
+	qrng.cpp \
+	qrng_logger.cpp
 
 qrng-objects := $(qrng-sources:.c=.c.o)
 qrng-objects := $(qrng-objects:.cpp=.cpp.o)

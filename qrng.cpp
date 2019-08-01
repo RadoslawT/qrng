@@ -1,14 +1,15 @@
 #include "qrng.h"
-#include <iostream>
-using namespace std;
-using namespace idQ;
 
-float getSimilarityRate(int bytesCount){
+string getMeasurement(int bytesCount){
   QuantisDeviceType deviceType = QUANTIS_DEVICE_USB;
   int deviceNumber = 0;
   Quantis quantis(deviceType, deviceNumber);
-  string buffer = quantis.Read(bytesCount);
-  unsigned char pattern[6] = { 34, 201, 123, 34, 54, 127 };
+
+  return quantis.Read(bytesCount);
+}
+
+float getSimilarityRate(string buffer){
+  unsigned char pattern[6] = { 53, 90, 147, 189, 137, 102 };
   unsigned char b;
   unsigned char c;
   int i = 0;

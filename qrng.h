@@ -1,4 +1,8 @@
 #include "Quantis.hpp"
+#include <iostream>
+using namespace std;
+using namespace idQ;
 
-float getSimilarityRate(int bytesCount);
+string getMeasurement(int bytesCount);
+float getSimilarityRate(std::string result);
 void printQrngInfo();

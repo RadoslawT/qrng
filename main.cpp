@@ -1,12 +1,16 @@
 #include <simple2d.h>
+#include <iostream>
 #include "qrng.h"
+#include "qrng_logger.h"
+
+using namespace std;
 
 S2D_Window *window;
 
 const float WHITE_BG      = 1.0;
 const float LIGHT_GRAY_BG = 0.75;
 const float GRAY_BG       = 0.5;
-const float DARK_GRAY_BG  = 0.25;
+const float DARK_GRAY_BG  = 0.07;
 const float BLACK_BG      = 0.0;
 
 int windowWidth = 1920;
@@ -15,6 +19,8 @@ int screenWidth;
 int screenHeight;
 
 float bgValue = 0.0;
+
+QrngLogger logger;
 
 void render();
 void update();
@@ -62,14 +68,16 @@ void render(){
 }
 
 void update(){
+
   if (window->frames % 1 == 0){
-    float similarity;
-    similarity = getSimilarityRate(6);
+    string result     = getMeasurement(6);
+    float  similarity = getSimilarityRate(result);
 
     if(bgValue != WHITE_BG)
       bgValue = calculateBgValue(similarity);
 
     printf("similarity: %f\n", similarity);
+    logger.log(result);
   }
 }
 
