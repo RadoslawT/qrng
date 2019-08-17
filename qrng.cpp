@@ -9,7 +9,7 @@ string getMeasurement(int bytesCount){
 }
 
 float getSimilarityRate(string buffer){
-  unsigned char pattern[6] = { 53, 90, 147, 189, 137, 102 };
+  unsigned char pattern[6] = { 36, 17, 153, 19, 238, 87 };
   unsigned char b;
   unsigned char c;
   int i = 0;

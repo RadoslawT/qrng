@@ -2,6 +2,7 @@
 #include <iostream>
 #include "qrng.h"
 #include "qrng_logger.h"
+#include "probability_helper.h"
 
 using namespace std;
 
@@ -46,7 +47,7 @@ int main() {
   printQrngInfo();
 
   window = S2D_CreateWindow(
-    "Hello Triangle", windowWidth, windowHeight, update, render, S2D_FULLSCREEN
+    "Screen", windowWidth, windowHeight, update, render, S2D_FULLSCREEN
   );
 
   window->on_key = onKey;
@@ -81,20 +82,10 @@ void update(){
   }
 }
 
-float calculateBgValue(float similarity){
-  if(inRange(similarity, 0.0, 0.1) || inRange(similarity, 0.9, 1.0))
+float calculateBgValue(float probability){
+  if(inRange(probability, 0.0, 0.001))
     return WHITE_BG;
-
-  if(inRange(similarity, 0.1, 0.2) || inRange(similarity, 0.8, 0.9))
-    return LIGHT_GRAY_BG;
-
-  if(inRange(similarity, 0.2, 0.3) || inRange(similarity, 0.7, 0.8))
-    return GRAY_BG;
-
-  if(inRange(similarity, 0.3, 0.4) || inRange(similarity, 0.6, 0.7))
-    return DARK_GRAY_BG;
-
-  if(inRange(similarity, 0.4, 0.6))
+  else
     return BLACK_BG;
 }
 
