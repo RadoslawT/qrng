@@ -30,7 +30,11 @@ endif
 qrng-sources := \
 	main.cpp \
 	qrng.cpp \
-	qrng_logger.cpp
+	qrng_logger.cpp \
+	quantum_measurements_set.cpp \
+	quantum_measurement.cpp \
+	probability_helper.cpp \
+	cast_helper.cpp
 
 qrng-objects := $(qrng-sources:.c=.c.o)
 qrng-objects := $(qrng-objects:.cpp=.cpp.o)

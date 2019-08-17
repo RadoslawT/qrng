@@ -3,6 +3,7 @@
 #include "qrng.h"
 #include "qrng_logger.h"
 #include "probability_helper.h"
+#include "quantum_measurements_set.h"
 
 using namespace std;
 
@@ -22,6 +23,12 @@ int screenHeight;
 float bgValue = 0.0;
 
 QrngLogger logger;
+
+int         bytesAmount = 6;
+vector<int> patternSequence = { 36, 17, 153, 19, 238, 87 };
+float       probabilityThreshold = 0.001;
+
+QuantumMeasurementsSet measurements(bytesAmount, patternSequence, probabilityThreshold);
 
 void render();
 void update();
@@ -71,19 +78,18 @@ void render(){
 void update(){
 
   if (window->frames % 1 == 0){
-    string result     = getMeasurement(6);
-    float  similarity = getSimilarityRate(result);
+    measurements.measure();
+    float  compoundProbability = measurements.lastMeasurement().compoundProbability;
 
     if(bgValue != WHITE_BG)
-      bgValue = calculateBgValue(similarity);
+      bgValue = calculateBgValue(compoundProbability);
 
-    printf("similarity: %f\n", similarity);
-    logger.log(result);
+    printf("compoundProbability: %f\n", compoundProbability);
   }
 }
 
 float calculateBgValue(float probability){
-  if(inRange(probability, 0.0, 0.001))
+  if(inRange(probability, 0.0, probabilityThreshold))
     return WHITE_BG;
   else
     return BLACK_BG;
