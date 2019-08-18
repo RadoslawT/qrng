@@ -4,8 +4,8 @@
 #include <iostream>
 #include <chrono>
 #include "Quantis.hpp"
-#include "cast_helper.h"
-#include "probability_helper.h"
+#include "../helpers/cast_helper.h"
+#include "../helpers/probability_helper.h"
 #include "quantum_measurements_set.h"
 
 using namespace idQ;

@@ -1,9 +1,9 @@
 #include <simple2d.h>
 #include <iostream>
-#include "qrng.h"
-#include "qrng_logger.h"
-#include "probability_helper.h"
-#include "quantum_measurements_set.h"
+#include "helpers/qrng.h"
+#include "models/qrng_logger.h"
+#include "helpers/probability_helper.h"
+#include "models/quantum_measurements_set.h"
 
 using namespace std;
 
