@@ -1,3 +1,2 @@
-sandbox
-qrng
+bin/*
 *.cpp.o
