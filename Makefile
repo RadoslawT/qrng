@@ -28,36 +28,31 @@ ifeq ($(OS),Darwin)
 endif
 
 qrng-sources := \
-	main.cpp \
-	qrng.cpp \
-	qrng_logger.cpp \
-	quantum_measurements_set.cpp \
-	quantum_measurement.cpp \
-	probability_helper.cpp \
-	cast_helper.cpp
+	src/main.cpp \
+	src/helpers/qrng.cpp \
+	src/models/qrng_logger.cpp \
+	src/models/quantum_measurements_set.cpp \
+	src/models/quantum_measurement.cpp \
+	src/helpers/probability_helper.cpp \
+	src/helpers/cast_helper.cpp
 
 qrng-objects := $(qrng-sources:.c=.c.o)
 qrng-objects := $(qrng-objects:.cpp=.cpp.o)
 
-
-
-
-
 all: qrng
-
 
 qrng: $(qrng-objects)
 	@echo "-->  Linking executable $@"
-	@$(CXX) -o $@ $(qrng-objects) $(LDFLAGS)
+	@$(CXX) -o bin/$@ $(qrng-objects) $(LDFLAGS)
 
 clean:
-	@rm -rf *.o *~ qrng
+	@rm -rf *.o *~ bin/qrng
 
 
 %.cpp.o: %.cpp
 	@echo "->  Building CXX object $@"
 	@$(CXX) -c $(CXXFLAGS) -o $@ $<
- 
+
 %.c.o: %.c
 	@echo "->  Building C object $@"
 	@$(CXX) -c $(CXXFLAGS) -o $@ $<
