@@ -29,11 +29,12 @@ endif
 
 qrng-sources := \
 	src/main.cpp \
-	src/helpers/qrng.cpp \
 	src/models/qrng_logger.cpp \
+	src/models/random_image_renderer.cpp \
 	src/models/quantum_measurements_set.cpp \
 	src/models/quantum_measurement.cpp \
 	src/helpers/probability_helper.cpp \
+	src/helpers/qrng.cpp \
 	src/helpers/cast_helper.cpp
 
 qrng-objects := $(qrng-sources:.c=.c.o)
