@@ -1,5 +1,4 @@
 #include "quantum_measurement.h"
-#include <iostream> //todo remoive
 
 QuantumMeasurement::QuantumMeasurement(int index, QuantumMeasurementsSet* measurementsSet) : index(index), measurementsSet(measurementsSet) {}
 
@@ -11,9 +10,6 @@ void QuantumMeasurement::measure(){
   sharedElementsAmount = getSharedElementsAmount(generatedSequence);
   simpleProbability    = ProbabilityHelper::simpleEventProbability(bytesAmount()*8, sharedElementsAmount);
   compoundProbability  = ProbabilityHelper::compoundEventProbability(bytesAmount()*8, sharedElementsAmount, index+1);
-
-  // std::cout << "shared: " << sharedElementsAmount << " seq: " << CastHelper::intBytesToBinaryString(generatedSequence)
-  //  << " simple: " << simpleProbability << " compound: " << compoundProbability << " bytes: " << bytesAmount() << " i:" << index << "\n";
 }
 
 

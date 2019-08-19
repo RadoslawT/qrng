@@ -1,5 +1,5 @@
 #include "helpers/qrng.h"
-#include "models/random_image_renderer.h"
+#include "modules/random_image_renderer.h"
 
 int main() {
   printQrngInfo();

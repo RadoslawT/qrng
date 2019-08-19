@@ -1,5 +1,4 @@
 #include "quantum_measurements_set.h"
-#include "quantum_measurement.h"
 
 QuantumMeasurementsSet::QuantumMeasurementsSet(int bytesAmount, std::vector<int> patternSequence, float probabilityThreshold) 
   : bytesAmount(bytesAmount), patternSequence(patternSequence), probabilityThreshold(probabilityThreshold), measurements({}) {}
