@@ -9,16 +9,8 @@ QrngLogger::QrngLogger(){
   fileName = ctime(&startTime);
 }
 
-void QrngLogger::log(string result){
-  string::iterator it = result.begin();
-  int byte;
-  string binaryStr = "";
-
-  while (it != result.end())
-  {
-    byte = (int)static_cast<unsigned char>(*it++);
-    binaryStr.append(bitset<8>(byte).to_string());
-  }
-
-  cout << binaryStr << ' ';
+void QrngLogger::log(QuantumMeasurement m){
+  float similarity =  m.sharedElementsAmount / (m.bytesAmount() * 8.0);
+  cout  << m.index << "," << m.createdAt << "," << m.simpleProbability << "," << similarity << "," << m.compoundProbability << 
+    "," << m.generatedSequenceBinaryString() << "," << m.probabilityThreshold() << "," << m.patternSequenceBinaryString() << "\n";
 }

@@ -4,10 +4,11 @@
 #include <chrono>
 #include <ctime>
 #include <bitset>
+#include "quantum_measurement.h"
 
 class QrngLogger{
   public:
 
   QrngLogger();
-  void log(std::string result);
+  void log(QuantumMeasurement result);
 };

@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <iostream>
+#include <string>
 #include <chrono>
 #include "Quantis.hpp"
 #include "../helpers/cast_helper.h"
@@ -21,6 +22,10 @@ class QuantumMeasurement{
   float compoundProbability;
   int sharedElementsAmount;
   vector<int> generatedSequence;
+  float probabilityThreshold();
+  std::string patternSequenceBinaryString();
+  std::string generatedSequenceBinaryString();
+  int bytesAmount();
 
   QuantumMeasurement(int index, QuantumMeasurementsSet* measurementsSet);
 
@@ -31,6 +36,5 @@ class QuantumMeasurement{
   vector<int> getMeasurement();
 
   int getSharedElementsAmount(vector<int> sequence);
-  int bytesAmount();
   vector<int> patternSequence();
 };

@@ -11,6 +11,7 @@ void QuantumMeasurement::measure(){
   sharedElementsAmount = getSharedElementsAmount(generatedSequence);
   simpleProbability    = ProbabilityHelper::simpleEventProbability(bytesAmount()*8, sharedElementsAmount);
   compoundProbability  = ProbabilityHelper::compoundEventProbability(bytesAmount()*8, sharedElementsAmount, index+1);
+
   // std::cout << "shared: " << sharedElementsAmount << " seq: " << CastHelper::intBytesToBinaryString(generatedSequence)
   //  << " simple: " << simpleProbability << " compound: " << compoundProbability << " bytes: " << bytesAmount() << " i:" << index << "\n";
 }
@@ -46,4 +47,16 @@ int QuantumMeasurement::bytesAmount(){
 
 vector<int> QuantumMeasurement::patternSequence(){
   return measurementsSet->patternSequence;
+}
+
+float QuantumMeasurement::probabilityThreshold(){
+  return measurementsSet->probabilityThreshold;
+}
+
+string QuantumMeasurement::patternSequenceBinaryString(){
+  return CastHelper::intBytesToBinaryString(patternSequence());
+}
+
+string QuantumMeasurement::generatedSequenceBinaryString(){
+  return CastHelper::intBytesToBinaryString(generatedSequence);
 }
