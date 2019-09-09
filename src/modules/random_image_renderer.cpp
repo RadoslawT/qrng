@@ -6,6 +6,7 @@ namespace RandomImageRenderer{
   const float GRAY_BG       = 0.5;
   const float DARK_GRAY_BG  = 0.07;
   const float BLACK_BG      = 0.0;
+  const int UPDATE_BG_MEASUREMENTS_SIZE = 20;
 
   int windowWidth = 1920;
   int windowHeight = 1200;
@@ -53,7 +54,7 @@ void RandomImageRenderer::update(){
     measurements.measure();
     QuantumMeasurement m = measurements.lastMeasurement();
 
-    if(bgValue != WHITE_BG)
+    if(bgValue != WHITE_BG && m.index > UPDATE_BG_MEASUREMENTS_SIZE)
       bgValue = calculateBgValue(m.compoundProbability);
 
     logger->log(m);
